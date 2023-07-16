@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="ProductInformationDB.View.UserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProductInformationDB.View"
+             mc:Ignorable="d" 
+             Height="683" Width="1000" Background="Wheat">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="684*"/>
+            <ColumnDefinition Width="317*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="92"/>
+            <RowDefinition Height="283*"/>
+            <RowDefinition Height="292*"/>
+        </Grid.RowDefinitions>
+
+        <Label FontSize="20" VerticalAlignment="Top" Content="    ACME Corporation" Height="34" Margin="394,14,46,0" FontWeight="Bold"/>
+
+        <DataGrid ItemsSource="{Binding Products}" SelectedItem="{Binding CurrentProduct}" x:Name="ProductDG" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
+                  Grid.Row="1" ColumnWidth="*" Margin="5,0,5,0" IsSynchronizedWithCurrentItem="True" Height="269" VerticalAlignment="Top" Grid.ColumnSpan="2" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Unit" Binding="{Binding Unit}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="5" BorderThickness="1" BorderBrush="Black">
+                <StackPanel  Margin="5">
+                    <Label Content="Add new product" FontWeight="Bold"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" Margin="5"/>
+
+                    <Grid Name="NewProductGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Product Name"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Description"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Description}"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Price"/>
+                        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Price}"/>
+
+                        <Label Grid.Row="3" Grid.Column="0" Content="Units"/>
+                        <TextBox Grid.Row="3" Grid.Column="4" Text="{Binding Amount}"/>
+
+                        <Button Grid.Row="4" Grid.ColumnSpan="2" Width="150" Content="Add" Margin="163,47,0,0" 
+                            HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.828"
+                                Command="{Binding AddProductCommand}"/>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Margin="5" BorderThickness="1" BorderBrush="Black">
+                <StackPanel Margin="5">
+                    <Label Content="Edit product" FontWeight="Bold"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" Margin="5"/>
+
+                    <Grid Name="UpdateProductGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Product Name"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentProduct.Name}"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Description"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding CurrentProduct.Description}"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Price"/>
+                        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding CurrentProduct.Price}"/>
+
+                        <Label Grid.Row="3" Grid.Column="0" Content="Units"/>
+                        <TextBox Grid.Row="3" Grid.Column="4" Text="{Binding CurrentProduct.Unit}"/>
+
+                        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
+                            <Button  Width="150"
+                                Content="Edit" Margin="80,49,0,0"
+                            HorizontalAlignment="Left" Command="{Binding EditProductCommand}"/>
+                            <Button  Width="150"
+                                Content="Delete" Margin="30,49,0,0"
+                            HorizontalAlignment="Left" Command="{Binding RemoveProductCommand}"/>
+
+                        </StackPanel>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Label FontSize="18" VerticalAlignment="Top" Content="Product Information Database" Height="34" Margin="380,48,24,0"/>
+        <Image HorizontalAlignment="Left" Height="72" Margin="31,0,0,0" VerticalAlignment="Center" Width="65" Source="/ACME-Logo.jpg" Stretch="Uniform"/>
+    </Grid>
+    
+</UserControl>
